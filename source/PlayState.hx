@@ -783,6 +783,16 @@ class PlayState extends MusicBeatState
 	
 						add(stageCurtains);
 				}
+			case 'shaggy':
+				{
+				defaultCamZoom = 1.05;
+				curStage = 'stage';
+				var bg:FlxSprite = new FlxSprite(-400, -160).loadGraphic(Paths.image('bg_lemon'));
+				bg.antialiasing = FlxG.save.data.antialiasing;
+				bg.scrollFactor.set(1, 1);
+				bg.active = false;
+				add(bg);
+		}
 			default:
 			{
 					defaultCamZoom = 0.9;
@@ -1101,20 +1111,31 @@ class PlayState extends MusicBeatState
 		healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, RIGHT_TO_LEFT, Std.int(healthBarBG.width - 8), Std.int(healthBarBG.height - 8), this,
 			'health', 0, 2);
 		healthBar.scrollFactor.set();
-		healthBar.createFilledBar(0xFFFF0000, 0xFF66FF33);
-		// healthBar
+		switch (curSong.toLowerCase()){
+			case 'god-eater':
+			  healthBar.createFilledBar(0xFF48316E, 0xFF5EB4EF);
+			default:
+			  healthBar.createFilledBar(0xFF327149, 0xFF5EB4EF);
+		  // healthBar
+		  }
 		add(healthBar);
 
 		overhealthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, RIGHT_TO_LEFT, Std.int(healthBarBG.width - 8), Std.int(healthBarBG.height - 8), this,
 		'health', 2.2, 4);
 		overhealthBar.scrollFactor.set();
-		overhealthBar.createFilledBar(0x00000000, 0xFFFFFF00);
-		// healthBar
-		add(overhealthBar);
+
+
+		var godColor = "0xFF48316E";
 
 		// Add Kade Engine watermark
-		kadeEngineWatermark = new FlxText(4,healthBarBG.y + 50,0,SONG.song + " - " + CoolUtil.difficultyFromInt(storyDifficulty) + (Main.watermarks ? " | KE " + MainMenuState.kadeEngineVer : ""), 16);
-		kadeEngineWatermark.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
+		switch (curSong.toLowerCase()){
+		default:
+			kadeEngineWatermark = new FlxText(4,healthBarBG.y + 50,0,SONG.song + " - " + CoolUtil.difficultyFromInt(storyDifficulty) + (Main.watermarks ? " | KE " + MainMenuState.kadeEngineVer : ""), 16);
+			kadeEngineWatermark.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
+		case 'god-eater':
+			kadeEngineWatermark = new FlxText(4,healthBarBG.y + 50,0,"G O D   E A T E R" + " - " + CoolUtil.difficultyFromInt(storyDifficulty) + (Main.watermarks ? " | KE " + MainMenuState.kadeEngineVer : ""), 16);
+			kadeEngineWatermark.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.fromString(godColor), RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
+		}
 		kadeEngineWatermark.scrollFactor.set();
 		add(kadeEngineWatermark);
 
@@ -1853,7 +1874,7 @@ class PlayState extends MusicBeatState
 					case 0: 
 						NoteSplash.colors = ['purple', 'blue', 'green', 'red'];
 					case 1: 
-						NoteSplash.colors = ['purple', 'green', 'red', 'yellow', 'blue', 'darkblue'];	
+						NoteSplash.colors = ['purple', 'blue', 'red', 'yellow', 'green', 'darkblue'];	
 					case 2: 
 						NoteSplash.colors = ['purple', 'blue', 'green', 'red', 'white', 'yellow', 'violet', FlxG.save.data.noteColor, 'darkblue'];
 					case 3: 
@@ -2194,8 +2215,8 @@ class PlayState extends MusicBeatState
 								switch (mania)
 								{
 									case 1:
-										nSuf = ['LEFT', 'UP', 'RIGHT', 'LEFT', 'DOWN', 'RIGHT'];
-										pPre = ['purple', 'green', 'red', 'yellow', 'blue', 'dark'];
+										nSuf = ['LEFT', 'DOWN', 'RIGHT', 'LEFT', 'UP', 'RIGHT'];
+										pPre = ['purple', 'blue', 'red', 'yellow', 'green', 'dark'];
 	
 									case 2:
 										nSuf = ['LEFT', 'DOWN', 'UP', 'RIGHT', 'SPACE', 'LEFT', 'DOWN', 'UP', 'RIGHT'];
@@ -2801,6 +2822,9 @@ class PlayState extends MusicBeatState
 					case 'senpai-angry':
 						camFollow.y = dad.getMidpoint().y - 430;
 						camFollow.x = dad.getMidpoint().x - 100;
+					case 'shaggy':
+						camFollow.y = dad.getMidpoint().y - 100;
+						camFollow.x = dad.getMidpoint().x - 100;
 				}
 
 				if (dad.curCharacter == 'mom')
@@ -2888,6 +2912,7 @@ class PlayState extends MusicBeatState
 			}
 		}
 
+
 		if (curSong == 'Bopeebo')
 		{
 			switch (curBeat)
@@ -2960,7 +2985,7 @@ class PlayState extends MusicBeatState
 			case 0: 
 				sDir = ['LEFT', 'DOWN', 'UP', 'RIGHT'];
 			case 1: 
-				sDir = ['LEFT', 'UP', 'RIGHT', 'LEFT', 'DOWN', 'RIGHT'];
+				sDir = ['LEFT', 'DOWN', 'RIGHT', 'LEFT', 'UP', 'RIGHT'];
 			case 2: 
 				sDir = ['LEFT', 'DOWN', 'UP', 'RIGHT', 'UP', 'LEFT', 'DOWN', 'UP', 'RIGHT'];
 			case 3: 
@@ -5173,7 +5198,7 @@ class PlayState extends MusicBeatState
 			switch (mania)
 			{
 				case 1: 
-					frameN = ['purple', 'green', 'red', 'yellow', 'blue', 'dark'];
+					frameN = ['purple', 'blue', 'red', 'yellow', 'green', 'dark'];
 				case 2: 
 					frameN = ['purple', 'blue', 'green', 'red', 'white', 'yellow', 'violet', 'black', 'dark'];
 				case 3: 

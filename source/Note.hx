@@ -333,7 +333,7 @@ class Note extends FlxSprite
 		switch (mania)
 		{
 			case 1: 
-				frameN = ['purple', 'green', 'red', 'yellow', 'blue', 'dark'];
+				frameN = ['purple', 'blue', 'red', 'yellow', 'green', 'dark'];
 			case 2: 
 				if (noteTypeCheck == 'pixel')
 					frameN = ['purple', 'blue', 'green', 'red', 'white', 'yellow', 'violet', 'black', 'dark'];
@@ -480,7 +480,7 @@ class Note extends FlxSprite
 			switch (mania)
 			{
 				case 1: 
-					frameN = ['purple', 'green', 'red', 'yellow', 'blue', 'dark'];
+					frameN = ['purple', 'blue', 'red', 'yellow', 'green', 'dark'];
 				case 2: 
 					frameN = ['purple', 'blue', 'green', 'red', 'white', 'yellow', 'violet', 'black', 'dark'];
 				case 3: 

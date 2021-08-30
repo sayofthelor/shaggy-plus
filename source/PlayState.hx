@@ -1257,10 +1257,6 @@ class PlayState extends MusicBeatState
 			{
 				default:
 					startCountdown();
-				case 'kaio-ken':
-					superShaggy();
-				case 'blast:
-					superShaggy();
 			}
 		}
 
@@ -1367,14 +1363,6 @@ class PlayState extends MusicBeatState
 	#end
 
 	var keys = [false, false, false, false, false, false, false, false, false];
-
-	function SuperShaggy():Void
-	{
-		dad.playAnim('burst');
-		FlxG.sound.play(Paths.sound('powerup'), 0.6);
-		das.playAnim('idle_s');
-		startCountdown();
-	}
 
 	function startCountdown():Void
 	{

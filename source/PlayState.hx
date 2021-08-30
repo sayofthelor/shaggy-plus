@@ -786,7 +786,7 @@ class PlayState extends MusicBeatState
 			case 'shaggy':
 				{
 				defaultCamZoom = 1.05;
-				curStage = 'stage';
+				curStage = 'spooky';
 				var bg:FlxSprite = new FlxSprite(-400, -160).loadGraphic(Paths.image('bg_lemon'));
 				bg.antialiasing = FlxG.save.data.antialiasing;
 				bg.scrollFactor.set(1, 1);
@@ -1257,6 +1257,10 @@ class PlayState extends MusicBeatState
 			{
 				default:
 					startCountdown();
+				case 'kaio-ken':
+					superShaggy();
+				case 'blast:
+					superShaggy();
 			}
 		}
 
@@ -1363,6 +1367,14 @@ class PlayState extends MusicBeatState
 	#end
 
 	var keys = [false, false, false, false, false, false, false, false, false];
+
+	function SuperShaggy():Void
+	{
+		dad.playAnim('burst');
+		FlxG.sound.play(Paths.sound('powerup'), 0.6);
+		das.playAnim('idle_s');
+		startCountdown();
+	}
 
 	function startCountdown():Void
 	{
